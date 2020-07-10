@@ -1,0 +1,7 @@
+name: Azure AD B2C OpenID Connect Plugin
+description: This module provides plugin support for Azure AD B2C OpenID Connect sign on and user data synchronization.
+package: Security
+
+type: module
+core: 8.x
+core_version_requirement: ^8 || ^9

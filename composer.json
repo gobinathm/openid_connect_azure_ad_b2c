@@ -1,0 +1,38 @@
+{
+  "name": "drupal/openid_connect_azure_ad_b2c",
+  "description": "Enables OpenID Connect Azure B2C sign on and user data synchronization.",
+  "type": "drupal-module",
+  "keywords": ["Drupal"],
+  "license": "MIT",
+  "homepage": "https://www.drupal.org/sandbox/gobinathm/3158420",
+  "minimum-stability": "dev",
+  "support": {
+    "issues": "https://www.drupal.org/project/issues/3158420?categories=All",
+    "source": "http://cgit.drupalcode.org/"
+  },
+  "require": {
+    "drupal/openid_connect": "^1.0"
+  },
+    "authors": [
+      {
+          "name": "Gobinath Mallaiyan",
+          "homepage": "https://www.drupal.org/u/gobinathm",
+          "role": "Maintainer"
+      },
+      {
+          "name": "Sastha Manikandan",
+          "homepage": "https://www.drupal.org/u/sastha",
+          "role": "Maintainer"
+      },
+      {
+          "name": "Amritendu Ghosh",
+          "homepage": "https://www.drupal.org/u/amritendu1980",
+          "role": "Maintainer"
+      },
+      {
+          "name": "Senthil Kannayram",
+          "homepage": "https://www.drupal.org/u/senthil-kannayram-v",
+          "role": "Maintainer"
+      }
+  ]
+}
