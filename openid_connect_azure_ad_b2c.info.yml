@@ -5,3 +5,8 @@ package: Security
 type: module
 core: 8.x
 core_version_requirement: ^8 || ^9
+
+dependencies:
+  - openid_connect:openid_connect
+
+configure: openid_connect.admin_settings

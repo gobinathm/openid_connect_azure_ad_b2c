@@ -30,6 +30,21 @@ class AzureB2C extends OpenIDConnectClientBase {
    */
   public function buildConfigurationForm(array $form, FormStateInterface $form_state) {
     $form = parent::buildConfigurationForm($form, $form_state);
+    $form['azure_b2c_authorization_endpoint'] = [
+      '#title' => $this->t('Authorization endpoint'),
+      '#type' => 'textfield',
+      '#default_value' => $this->configuration['azure_b2c_authorization_endpoint'],
+    ];
+    $form['azure_b2c_token_endpoint'] = [
+      '#title' => $this->t('Token endpoint'),
+      '#type' => 'textfield',
+      '#default_value' => $this->configuration['azure_b2c_token_endpoint'],
+    ];
+    $form['azure_b2c_userinfo_endpoint'] = [
+      '#title' => $this->t('UserInfo endpoint'),
+      '#type' => 'textfield',
+      '#default_value' => $this->configuration['azure_b2c_userinfo_endpoint'],
+    ];
 
     return $form;
   }
@@ -42,7 +57,11 @@ class AzureB2C extends OpenIDConnectClientBase {
    *   userinfo object.
    */
   public function getEndpoints() {
-    return NULL;
+    return [
+      'authorization' => $this->configuration['azure_b2c_authorization_endpoint'],
+      'token' => $this->configuration['azure_b2c_token_endpoint'],
+      'userinfo' => $this->configuration['azure_b2c_userinfo_endpoint'],
+    ];
   }
 
 }
