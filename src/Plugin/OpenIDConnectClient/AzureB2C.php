@@ -34,6 +34,7 @@ class AzureB2C extends OpenIDConnectClientBase {
       '#title' => $this->t('Authorization endpoint'),
       '#type' => 'textfield',
       '#default_value' => $this->configuration['azure_b2c_authorization_endpoint'],
+      '#required' => TRUE,
     ];
     $form['azure_b2c_token_endpoint'] = [
       '#title' => $this->t('Token endpoint'),
@@ -47,6 +48,33 @@ class AzureB2C extends OpenIDConnectClientBase {
     ];
 
     return $form;
+  }
+
+  /**
+   * Overrides OpenIDConnectClientBase::validateConfigurationForm().
+   */
+  public function validateConfigurationForm(array &$form, FormStateInterface $form_state) {
+    $provider = [
+      '@provider' => $this->getPluginDefinition()['label'],
+    ];
+    $configuration = $form_state->getValues();
+
+    // Valid none of client config is empty.
+    if (empty($configuration['client_id'])) {
+      $form_state->setErrorByName('client_id', $this->t('The Client ID is missing for @provider.', $provider));
+    }
+    if (empty($configuration['client_secret'])) {
+      $form_state->setErrorByName('client_secret', $this->t('The client Secret is missing for @provider.', $provider));
+    }
+    if (empty($configuration['azure_b2c_authorization_endpoint'])) {
+      $form_state->setErrorByName('azure_b2c_authorization_endpoint', $this->t('The Authorization endpoint is missing for @provider.', $provider));
+    }
+    if (empty($configuration['azure_b2c_token_endpoint'])) {
+      $form_state->setErrorByName('azure_b2c_token_endpoint', $this->t('The Token endpoint is missing for @provider.', $provider));
+    }
+    if (empty($configuration['azure_b2c_userinfo_endpoint'])) {
+      $form_state->setErrorByName('azure_b2c_userinfo_endpoint', $this->t('The UserInfo endpoint is missing for @provider.', $provider));
+    }
   }
 
   /**
