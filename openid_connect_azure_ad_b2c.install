@@ -11,4 +11,12 @@
 function openid_connect_azure_ad_b2c_install() {
   $adminConfig = Url::fromRoute('openid_connect.admin_settings')->toString();
   \Drupal::messenger()->addStatus(t('Azure AD B2C OpenID Connect Plugin has been enabled. Proceed to the <a href=":url">Configuration form</a>.', [':url' => $adminConfig]));
+}}
+
+/**
+ * Implements hook_uninstall().
+ */
+function openid_connect_azure_ad_b2c_uninstall() {
+  // Remove configuration.
+  \Drupal::messenger()->addStatus(t('Azure AD B2C OpenID Connect Plugin has been uninstalled.'));
 }

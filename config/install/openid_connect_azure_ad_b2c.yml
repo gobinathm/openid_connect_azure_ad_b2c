@@ -3,5 +3,10 @@ settings:
   client_id: 
   client_secret:
   azure_b2c_authorization_endpoint: 'https://login.microsoft.com/<tenant-name>.onmicrosoft.com/<policy-name>/oauth2/v2.0/authorize'
+  azure_b2c_token_endpoint_override: false
   azure_b2c_token_endpoint: 'https://login.microsoft.com/<tenant-name>.onmicrosoft.com/<policy-name>/oauth2/v2.0/token'
+  azure_b2c_userinfo_endpoint_exist: false
   azure_b2c_userinfo_endpoint: 'https://<tenant-name>.azurewebsites.net/api/UserInfo'
+  azure_b2c_single_sign_out: false
+  azure_b2c_site_language_exchange: false
+  azure_b2c_site_language_parameter: language
