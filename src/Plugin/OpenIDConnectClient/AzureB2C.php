@@ -18,7 +18,7 @@ use Drupal\openid_connect\Plugin\OpenIDConnectClientBase;
 class AzureB2C extends OpenIDConnectClientBase {
 
   // String Used in help texts.
-  const B2C_SAMPLE_URL = "https://login.microsoft.com/<tenant-name>.onmicrosoft.com/<policy-name>/oauth2/v2.0/authorize";
+  const B2C_SAMPLE_URL = "https://login.microsoft.com/<tenant-name>.onmicrosoft.com/<policy-name>/oauth2/v2.0/authorize?language=us";
 
   /**
    * Overrides OpenIDConnectClientBase::settingsForm().
@@ -155,6 +155,42 @@ class AzureB2C extends OpenIDConnectClientBase {
   }
 
   /**
+   * Overrides OpenIDConnectClientBase::authorize().
+   */
+  public function authorize($scope = 'openid email') {
+    // Generate Redirect URL.
+    $redirect_url = $this->generateRedirectUrl()->getGeneratedUrl();
+
+    $url_options = [
+      'query' => [
+        'client_id' => $this->configuration['client_id'],
+        'response_type' => 'code',
+        'scope' => $scope,
+        'redirect_uri' => $redirect_url,
+        'state' => OpenIDConnectStateToken::create(),
+      ],
+    ];
+
+    // Check & Add language Parameter.
+    if ($this->configuration['azure_b2c_site_language_exchange']) {
+      $url_options = [
+        'query' => [
+          $this->configuration['azure_b2c_site_language_parameter'] => $this->getLanguage(),
+        ],
+      ];
+    }
+
+    $endpoints = $this->getEndpoints();
+    $authorization_endpoint = Url::fromUri($endpoints['authorization'], $url_options)->toString(TRUE);
+
+    $response = new TrustedRedirectResponse($authorization_endpoint->getGeneratedUrl());
+    // Kill switch will prevent the page getting cached for anonymous users when page cache is active.
+    \Drupal::service('page_cache_kill_switch')->trigger();
+
+    return $response;
+  }
+
+  /**
    * Generates & Returns token endpoint.
    *
    * @param string $endpoint_type
@@ -168,6 +204,32 @@ class AzureB2C extends OpenIDConnectClientBase {
       return $this->configuration['azure_b2c_token_endpoint_override'];
     }
     return str_ireplace("/authorize", "/token", $this->configuration['azure_b2c_authorization_endpoint']);
+  }
+
+  /**
+   * Returns the redirect URL.
+   *
+   * @return string
+   *   A string containing fully qualified url.
+   */
+  protected function generateRedirectUrl(array $route_parameters = [], array $options = []): Url {
+    $language_none = $this->languageManager
+      ->getLanguage(LanguageInterface::LANGCODE_NOT_APPLICABLE);
+
+    // @todo . Fix Standard Issue.
+    // PHPCS Error - The array declaration extends to column 159 (the limit is 80). The array content should be split up over multiple lines.
+    return Url::fromRoute('openid_connect.redirect_controller_redirect', ['client_name' => $this->pluginId], ['absolute' => TRUE, 'language' => $language_none])->toString();
+  }
+
+  /**
+   * Returns the URL Parameter.
+   *
+   * @return array|bool
+   *   A result string or false.
+   */
+  protected function getLanguage() {
+    // Get current language.
+    return \Drupal::languageManager()->getCurrentLanguage()->getId();
   }
 
 }
