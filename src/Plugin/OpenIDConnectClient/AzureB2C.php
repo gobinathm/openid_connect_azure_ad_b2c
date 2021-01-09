@@ -56,6 +56,11 @@ class AzureB2C extends OpenIDConnectClientBase {
           ':input[name="clients[azure_b2c][settings][azure_b2c_token_endpoint_override]"]' => ['checked' => TRUE],
         ],
       ],
+      '#required' =>[
+        'visible' => [
+          ':input[name="clients[azure_b2c][settings][azure_b2c_token_endpoint_override]"]' => ['checked' => TRUE],
+        ],
+      ],
     ];
     // @todo . Explain why UserInfo End Point is not mandatory for B2C.
     $form['azure_b2c_userinfo_endpoint_exist'] = [
@@ -69,6 +74,11 @@ class AzureB2C extends OpenIDConnectClientBase {
       '#type' => 'textfield',
       '#default_value' => $this->configuration['azure_b2c_userinfo_endpoint'] ?? '',
       '#states' => [
+        'visible' => [
+          ':input[name="clients[azure_b2c][settings][azure_b2c_userinfo_endpoint_exist]"]' => ['checked' => TRUE],
+        ],
+      ],
+      '#required' =>[
         'visible' => [
           ':input[name="clients[azure_b2c][settings][azure_b2c_userinfo_endpoint_exist]"]' => ['checked' => TRUE],
         ],
@@ -96,6 +106,11 @@ class AzureB2C extends OpenIDConnectClientBase {
         '#default_value' => $this->configuration['azure_b2c_site_language_parameter'] ?? 'language',
         '#description' => $this->t('By default <b>language</b> would be the Variable passed to B2C, unless overridden above. Ex. URL <a href=":url">:url</a>.', [':url' => self::B2C_SAMPLE_URL]),
         '#states' => [
+          'visible' => [
+            ':input[name="clients[azure_b2c][settings][azure_b2c_site_language_exchange]"]' => ['checked' => TRUE],
+          ],
+        ],
+        '#required' =>[
           'visible' => [
             ':input[name="clients[azure_b2c][settings][azure_b2c_site_language_exchange]"]' => ['checked' => TRUE],
           ],
