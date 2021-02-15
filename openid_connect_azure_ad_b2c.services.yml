@@ -1,0 +1,23 @@
+
+
+services:
+  openid_connect_azure_ad_b2c.route_subscriber:
+    class: Drupal\openid_connect_azure_ad_b2c\EventSubscriber\OpenidConnectAzureAdB2cRouteSubscriber
+    tags:
+      - { name: event_subscriber }
+
+  # keycloak.keycloak:
+  #   class: Drupal\keycloak\Service\KeycloakService
+  #   arguments: ['@config.factory', '@plugin.manager.openid_connect_client.processor', '@language_manager', '@current_user', '@user.private_tempstore', '@logger.factory']
+
+  # keycloak.route_subscriber:
+  #   class: Drupal\keycloak\Routing\KeycloakRouteSubscriber
+  #   arguments: ['@keycloak.keycloak']
+  #   tags:
+  #     - { name: event_subscriber }
+
+  # keycloak.request_subscriber:
+  #   class: Drupal\keycloak\EventSubscriber\KeycloakRequestSubscriber
+  #   arguments: ['@keycloak.keycloak', '@language_manager', '@path_processor_manager', '@path.matcher']
+  #   tags:
+  #     - { name: event_subscriber }

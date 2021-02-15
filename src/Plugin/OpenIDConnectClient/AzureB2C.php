@@ -44,6 +44,7 @@ class AzureB2C extends OpenIDConnectClientBase {
     $form['azure_b2c_token_endpoint_override'] = [
       '#title' => $this->t('Have a custom Token Endpoint ?'),
       '#type' => 'checkbox',
+      '#return_value' => TRUE,
       '#default_value' => $this->configuration['azure_b2c_token_endpoint_override'] ?? '',
       '#description' => $this->t('Enabled if you want to provide an overridden Token Endpoint.'),
     ];
@@ -56,7 +57,7 @@ class AzureB2C extends OpenIDConnectClientBase {
           ':input[name="clients[azure_b2c][settings][azure_b2c_token_endpoint_override]"]' => ['checked' => TRUE],
         ],
       ],
-      '#required' =>[
+      '#required' => [
         'visible' => [
           ':input[name="clients[azure_b2c][settings][azure_b2c_token_endpoint_override]"]' => ['checked' => TRUE],
         ],
@@ -66,6 +67,7 @@ class AzureB2C extends OpenIDConnectClientBase {
     $form['azure_b2c_userinfo_endpoint_exist'] = [
       '#title' => $this->t('Have a custom UserInfo Endpoint ?'),
       '#type' => 'checkbox',
+      '#return_value' => TRUE,
       '#default_value' => $this->configuration['azure_b2c_token_endpoint_override'] ?? 0,
       '#description' => $this->t('Enabled if you have a UserInfo Endpoint to be configured.'),
     ];
@@ -78,7 +80,7 @@ class AzureB2C extends OpenIDConnectClientBase {
           ':input[name="clients[azure_b2c][settings][azure_b2c_userinfo_endpoint_exist]"]' => ['checked' => TRUE],
         ],
       ],
-      '#required' =>[
+      '#required' => [
         'visible' => [
           ':input[name="clients[azure_b2c][settings][azure_b2c_userinfo_endpoint_exist]"]' => ['checked' => TRUE],
         ],
@@ -88,6 +90,7 @@ class AzureB2C extends OpenIDConnectClientBase {
     $form['azure_b2c_single_sign_out'] = [
       '#title' => $this->t('Enable Drupal-invoked single sign-out'),
       '#type' => 'checkbox',
+      '#return_value' => TRUE,
       '#default_value' => $this->configuration['azure_b2c_sign_out'] ?? 0,
       '#description' => $this->t("Enabled if Drupal should sign out the user from Azure AD B2C when initiated from a logout is click."),
     ];
@@ -97,6 +100,7 @@ class AzureB2C extends OpenIDConnectClientBase {
       $form['azure_b2c_site_language_exchange'] = [
         '#title' => $this->t('eXchange User Language with Azure AD B2C ?'),
         '#type' => 'checkbox',
+        '#return_value' => TRUE,
         '#default_value' => $this->configuration['azure_b2c_sign_out'] ?? 0,
         '#description' => $this->t("Enabled if Drupal should pass users site language as a parameter to b2c."),
       ];
@@ -110,7 +114,7 @@ class AzureB2C extends OpenIDConnectClientBase {
             ':input[name="clients[azure_b2c][settings][azure_b2c_site_language_exchange]"]' => ['checked' => TRUE],
           ],
         ],
-        '#required' =>[
+        '#required' => [
           'visible' => [
             ':input[name="clients[azure_b2c][settings][azure_b2c_site_language_exchange]"]' => ['checked' => TRUE],
           ],

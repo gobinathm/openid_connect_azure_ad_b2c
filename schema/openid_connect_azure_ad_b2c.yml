@@ -1,0 +1,26 @@
+# Schema for the configuration files of the Azure AD B2C OpenID Connect Plugin.
+openid_connect.settings.openid_connect_azure_ad_b2c:
+  type: config_object
+  label: 'Azure AD B2C OpenID Connect Plugin Settings'
+  mapping:
+    enabled:
+      type: boolean
+      label: 'Enable client'
+    settings:
+      type: mapping
+      mapping:
+        client_id:
+          type: string
+          label: 'Client ID'
+        client_secret:
+          type: string
+          label: 'Client secret'
+        azure_b2c_authorization_endpoint:
+          type: string
+          label: 'Authorization endpoint'
+        azure_b2c_token_endpoint:
+          type: string
+          label: 'Token endpoint'
+        azure_b2c_userinfo_endpoint:
+          type: string
+          label: 'Userinfo endpoint'

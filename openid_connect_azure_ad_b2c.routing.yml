@@ -1,0 +1,28 @@
+openid_connect_azure_ad_b2c.example:
+  path: '/openid-connect-azure-ad-b2c/example'
+  defaults:
+    _title: 'Example'
+    _controller: '\Drupal\openid_connect_azure_ad_b2c\Controller\OpenidConnectAzureAdB2cController::build'
+  requirements:
+    _permission: 'access content'
+
+
+# keycloak.login:
+#   path: 'keycloak/login'
+#   defaults:
+#     _form: '\Drupal\user\Form\UserLoginForm'
+#     _title: 'Log in'
+#   requirements:
+#     _user_is_logged_in: 'FALSE'
+#   options:
+#     _maintenance_access: TRUE
+
+# keycloak.logout:
+#   path: 'keycloak/logout'
+#   defaults:
+#     _controller: '\Drupal\keycloak\Controller\KeycloakController::logout'
+#   requirements:
+#     # We always allow logout by hitting this route.
+#     _access: 'TRUE'
+#   options:
+#     no_cache: TRUE
